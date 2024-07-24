@@ -2,7 +2,7 @@
 <div class="container">
     <!-- Branding Image -->
     <a class="navbar-brand " href="{{ url('/') }}">
-    LaraBBS
+   BBS
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -23,8 +23,8 @@
         @else
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           <img  src="{{ $user->avatar?$user->avatar:'https://cdn.learnku.com/uploads/images/201709/20/1/PtDKbASVcz.png?imageView2/1/w/600/h/600' }}" class="img-responsive img-circle" alt="{{ $user->name }}" width="30px" height="30px">
-       
+           <img  src="{{ Auth::user()->avatar?:'https://cdn.learnku.com/uploads/images/201709/20/1/PtDKbASVcz.png?imageView2/1/w/600/h/600' }}" class="img-responsive img-circle" alt="{{ Auth::user()->name }}" width="30px" height="30px">
+
             {{ Auth::user()->name }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
