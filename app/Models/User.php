@@ -24,7 +24,10 @@ class User extends Authenticatable implements MustVerifyEmailContract
         'password',
         'remember_token',
     ];
-
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
