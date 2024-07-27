@@ -31,6 +31,11 @@
               <i class="fa fa-plus"></i>
             </a>
           </li>
+          <li class="nav-item notification-badge">
+            <a class="nav-link mr-3 badge badge-pill badge-{{ Auth::user()->notification_count > 0 ? 'hint' : 'secondary' }} text-white" href="{{ route('notifications.index') }}">
+              {{ Auth::user()->notification_count }}
+            </a>
+          </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
            <img  src="{{ Auth::user()->avatar?:'https://cdn.learnku.com/uploads/images/201709/20/1/PtDKbASVcz.png?imageView2/1/w/600/h/600' }}" class="img-responsive img-circle" alt="{{ Auth::user()->name }}" width="30px" height="30px">
