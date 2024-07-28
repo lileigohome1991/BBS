@@ -2,11 +2,13 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Category;
 use App\Models\Topic;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Encore\Admin\Layout\Content;
 
 class TopicsController extends AdminController
 {
@@ -33,9 +35,11 @@ class TopicsController extends AdminController
         $grid->view_count('阅览数量');
         $grid->reply_count('回复数量');
 
+
+        $grid->disableCreateButton();
         $grid->actions(function ($actions) {
-            $actions->disableView();
-            $actions->disableDelete();
+            // $actions->disableView();
+            // $actions->disableDelete();
         });
         $grid->tools(function ($tools) {
             // 禁用批量删除按钮
@@ -82,18 +86,29 @@ class TopicsController extends AdminController
     protected function form()
     {
         $form = new Form(new Topic());
-
-        $form->text('title', __('Title'));
-        $form->textarea('body', __('Body'));
-        $form->number('user_id', __('User id'));
-        $form->number('category_id', __('Category id'));
-        $form->number('reply_count', __('Reply count'));
-        $form->number('view_count', __('View count'));
-        $form->number('last_reply_user_id', __('Last reply user id'));
-        $form->number('order', __('Order'));
-        $form->textarea('excerpt', __('Excerpt'));
-        $form->text('slug', __('Slug'));
-
+      
+        $form->text('title', '标题')->rules('required');
+        // 放在商品名称后面
+       
+        $form->select('category_id', '类目')->options(function ($id) {
+            $category = Category::find($id);
+            if ($category) {
+                return [$category->id => $category->name];
+            }
+        })->ajax('/admin/api/categories?is_directory=0');
+       
+        $form->quill('body', '话题内容')->rules('required');
+        
         return $form;
     }
+
+
+     //自定义页面的方式来展示订单。
+     public function show($id, Content $content)
+     {
+         return $content
+             ->header('查看话题')
+             // body 方法可以接受 Laravel 的视图作为参数
+             ->body(view('admin.topics.show', ['topic' => Topic::find($id)]));
+     }
 }
