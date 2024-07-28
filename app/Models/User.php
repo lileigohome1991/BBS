@@ -16,6 +16,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
     use Notifiable {
         notify as protected laravelNotify;
     }
+    use Traits\ActiveUserHelper;
 
     // 加上这个 Trait
   use DefaultDatetimeFormat;
