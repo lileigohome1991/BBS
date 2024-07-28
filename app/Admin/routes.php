@@ -27,4 +27,20 @@ Route::group([
 
     $router->get('topics/{topic}', 'TopicsController@show')->name('topics.show');
 
+    $router->get('links', 'LinksController@index');
+
+    $router->get('links/create', 'LinksController@create');
+    $router->post('links', 'LinksController@store');
+
+    $router->get('links/{id}/edit', 'LinksController@edit');
+    $router->put('links/{id}', 'LinksController@update');
+    $router->delete('links/{id}', 'LinksController@destroy');
+
+
+    $router->get('replies', 'RepliesController@index');
+
+    $router->get('replies/{id}/edit', 'RepliesController@edit');
+    $router->put('replies/{id}', 'RepliesController@update');
+    // $router->delete('replies/{id}', 'RepliesController@destroy');
+
 });
