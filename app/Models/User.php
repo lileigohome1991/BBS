@@ -8,12 +8,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Auth;
+
+use Encore\Admin\Traits\DefaultDatetimeFormat;
 class User extends Authenticatable implements MustVerifyEmailContract
 {
     use HasFactory, MustVerifyEmailTrait;
     use Notifiable {
         notify as protected laravelNotify;
     }
+
+    // 加上这个 Trait
+  use DefaultDatetimeFormat;
 
     protected $fillable = [
         'name',
