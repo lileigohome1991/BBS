@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Handlers\ImageUploadHandler;
 use  Auth;
+// use Illuminate\Support\Facades\Redis;
 
 use App\Models\Link;
 
@@ -22,6 +23,9 @@ class TopicsController extends Controller
 
 	public function index(Request $request, Topic $topic,User $user, Link $link)
     {    
+
+        // dd(Redis::hgetall("user:1"));
+    
         // $topics = $topic->withOrder($request->order)
         //                 ->with('user', 'category')  // 预加载防止 N+1 问题
         //                 ->paginate(20);

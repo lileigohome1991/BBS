@@ -42,3 +42,15 @@ Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]
 // Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
 
 Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
+
+
+
+//layim 路由
+Route::get('/chat/:token', 'PagesController@chat'); 
+// Route::get('/getFriend', 'PagesController@getFriend');
+Route::post('/upload', 'PagesController@upload');
+Route::get('/chatlog', 'PagesController@chatlog');
+Route::post('/sign', 'PagesController@sign');
+Route::post('/status', 'PagesController@status');
+Route::post('/online', 'PagesController@online');
+Route::get('/getFriend', 'PagesController@getFriend')->name('root.getFriend');

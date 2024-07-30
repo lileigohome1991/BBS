@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -68,10 +70,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+            $username=$data['name'];
+            $password = Hash::make($data['password']);
+            //$redis=Cache::store('redis')->handler();
+            //redis 存用户信息   hash  user:1  key => ['username'=>'','id'=>1,'sign'=>'']
+            $user_id=Redis::incr('user:id');
+            Redis::set($username,$user_id);
+            $user_info = [
+                'username'=>$username,
+                'email'=>$data['email'],
+                'id'=>$user_id,
+                'password'=>$password,
+                'sign' => '多维好点，可以吗',
+                'avatar'=>'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028&app=3028&f=JPEG&fmt=auto?w=1280&h=960',
+                'status'=>'online'		
+            ];
+            // $redis->hMset('user:'.$user_id,$user_info);
+            Redis::hmset('user:'.$user_id,$user_info);
+            session()->put('id',$user_id);
+            $key = config('app.key');
+    
+            $chat_token=encrypt($user_id,$key);
+           // return json(['status'=>'success','token'=>$token]);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'chat_token'=> $chat_token,
         ]);
     }
 }
