@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use App\Handlers\ImageUploadHandler;
 
 class PagesController extends Controller
 {
@@ -65,14 +66,44 @@ class PagesController extends Controller
 		$data['data']['friend'][0]=$friend ;
 		return json_encode($data);
   }
-  public function upload(){
-	$file = request()->file('file');
-    	// 移动到框架应用根目录/uploads/ 目录下
-    	$info = $file->move( 'uploads');
-	//var_dump($info->getSaveName());
 
-	return json_encode(['code'=>0,'msg'=>'success','data'=>['src'=>'/uploads/'.$info->getSaveName()]]);
+
+
+  public function upload(Request $request){
+	// $file = request()->file('file');
+    // 	// 移动到框架应用根目录/uploads/ 目录下
+    // 	$info = $file->move( 'uploads');
+	// //var_dump($info->getSaveName());
+
+	// return json_encode(['code'=>0,'msg'=>'success','data'=>['src'=>'/uploads/'.$info->getSaveName()]]);
+
+     // 初始化返回数据，默认是失败的
+     $data = [
+        'data'   => [],
+        'msg'       => '上传失败!',
+        'code' => ''
+    ];
+    // 判断是否有上传文件，并赋值给 $file
+    if ($file = $request->upload_file) {
+        // 保存图片到本地
+        $result = $uploader->save($file, 'chat', \Auth::id());
+        // 图片保存成功的话
+        if ($result) {
+            $data['data'] = ['src'=>$result['path']];
+            $data['msg']       = "success";
+            $data['code']   = 0;
+        }
+    }
+
+    return json_encode($data);
+    // return $data;
+
   }
+
+
+
+
+
   public function chatlog(Request $request){
 	 $to_id=$request->param('id');
 	 $from_id=session('id');

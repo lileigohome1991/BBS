@@ -43,13 +43,13 @@
 
 layui.use('layim',function(layim){
 	
-	// ws=new WebSocket("wss://8.130.77.188:8888?token={$token}");
+	ws=new WebSocket("wss://8.130.77.188:9502?uid={{Auth::id()}}");
 	
 
 	layim.config({
     brief:false,
     minRight:'300px',
-		title:'web聊天',
+		title:'家人们聊天',
 		isgroup:false,
 		copyright:true,
 		init:{		
@@ -87,10 +87,10 @@ layui.use('layim',function(layim){
 
 	layim.on('sendMessage', function(res){
 		console.log(res);
-		//  ws.send(JSON.stringify({
-   	// 		 type: 'chatMessage' //随便定义，用于在服务端区分消息类型
-    // 			,data: res
- 		//  })); 
+		 ws.send(JSON.stringify({
+   			 type: 'chatMessage' //随便定义，用于在服务端区分消息类型
+    			,data: res
+ 		 })); 
 	})
 	layim.on('sign', function(value){
 		 console.log(value); //获得新的签名
