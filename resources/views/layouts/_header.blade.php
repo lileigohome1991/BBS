@@ -45,7 +45,7 @@
           </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           <img  src="{{ Auth::user()->avatar?:'https://cdn.learnku.com/uploads/images/201709/20/1/PtDKbASVcz.png?imageView2/1/w/600/h/600' }}" class="img-responsive img-circle" alt="{{ Auth::user()->name }}" width="30px" height="30px">
+           <img  src="{{ Auth::user()->avatar?:'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028&app=3028&f=JPEG&fmt=auto?w=1280&h=960' }}" class="img-responsive img-circle" alt="{{ Auth::user()->name }}" width="30px" height="30px">
 
             {{ Auth::user()->name }}
             </a>
