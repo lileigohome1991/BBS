@@ -62,10 +62,10 @@ class GatewayWorkerCommand extends Command
     {
         $content=array(
             "ssl"=>array(
-                'local_cert'=>'/etc/nginx/cert/limuyi.shop.pem'
-                'local_pk'=>'/etc/nginx/cert/limuyi.shop.key'
-                "verify_peer"=>
-            );
+                'local_cert'=>'/etc/nginx/cert/limuyi.shop.pem',
+                'local_pk'=>'/etc/nginx/cert/limuyi.shop.key',
+                "verify_peer"=>false
+            )
 
         );
         $gateway = new Gateway('websocket://0.0.0.0:' . $this->port,$content);
