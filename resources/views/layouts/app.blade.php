@@ -61,9 +61,9 @@ layui.use('layim',function(layim){
 			"data":{}
 		},
 
-		uploadImage:{
-			url:"{{ env('APP_URL') }}/upload"
-		},
+		// uploadImage:{
+		// 	url:"{{ env('APP_URL') }}/upload"
+		// },
 		
 
 		//以下为我们内置的模版，也可以换成你的任意页面。若不开启，剔除该项即可
@@ -95,28 +95,28 @@ layui.use('layim',function(layim){
     			,data: res
  		 })); 
 	})
-	layim.on('sign', function(value){
-		 console.log(value); //获得新的签名
-  		$.post('/sign',{sign:value},function(res){
+	// layim.on('sign', function(value){
+	// 	 console.log(value); //获得新的签名
+  	// 	$.post('/sign',{sign:value},function(res){
 							
-		})
- 		 //此时，你就可以通过Ajax将新的签名同步到数据库中了。
-	}); 
+	// 	})
+ 	// 	 //此时，你就可以通过Ajax将新的签名同步到数据库中了。
+	// }); 
 
 	//每次窗口打开或切换，即更新对方的状态
-	layim.on('chatChange', function(res){
+	// layim.on('chatChange', function(res){
 
-		$.post('/status',{uid:res.data.id},function(result){
-			//result=JSON.parse(result);
-			console.log(result);
-			if(result.status == 'online'){
-    				layim.setChatStatus('<span style="color:#00ff00;">在线</span>'); //模拟标注好友在线状态
-			}else{
+	// 	$.post('/status',{uid:res.data.id},function(result){
+	// 		//result=JSON.parse(result);
+	// 		console.log(result);
+	// 		if(result.status == 'online'){
+    // 				layim.setChatStatus('<span style="color:#00ff00;">在线</span>'); //模拟标注好友在线状态
+	// 		}else{
 
-    				layim.setChatStatus('<span style="color:#dcdcdc;">离线</span>'); //模拟标注好友在线状态
-			}	
-		})
-    	});
+    // 				layim.setChatStatus('<span style="color:#dcdcdc;">离线</span>'); //模拟标注好友在线状态
+	// 		}	
+	// 	})
+    // 	});
 
 	layim.on('online', function(status){
   		console.log(status); //获得online或者hide
