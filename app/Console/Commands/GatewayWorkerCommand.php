@@ -12,9 +12,9 @@ use Workerman\Worker;
 class GatewayWorkerCommand extends Command
 {
     // 命令行的名称及签名。
-    protected $signature = 'gateway-worker:server';
+    protected $signature = 'gateway-worker:server {action} {--daemon}';
     // 命令行的描述
-    protected $description = "开启gateway  服务.....";
+    protected $description = "start gateway.....";
 
     protected $port = 9502;
 
