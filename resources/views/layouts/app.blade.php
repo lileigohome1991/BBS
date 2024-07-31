@@ -87,7 +87,6 @@ layui.use('layim',function(layim){
 	});
 	
 	layim.on('sendMessage', function(res){
-		console.log('我在发消息。。',res);
 		 ws.send(JSON.stringify({
    			 type: 'chatMessage' //随便定义，用于在服务端区分消息类型
     			,data: res
@@ -131,8 +130,6 @@ layui.use('layim',function(layim){
 
 		
 	ws.onmessage=function(res){
-		console.log('收到消息---',res);
-
 		res=JSON.parse(res.data)
 		if(res.type == 'friend'){
 			layim.getMessage(res);	
