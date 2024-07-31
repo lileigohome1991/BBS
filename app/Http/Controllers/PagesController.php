@@ -105,15 +105,15 @@ class PagesController extends Controller
 
 
   public function chatlog(Request $request){
-	 $to_id=$request->param('id');
-	 $from_id=session('id');
+	 $to_id=$request->id;
+	 $from_id=session()->get('id');
 	 $arr=[$to_id,$from_id];
 	 sort($arr);
 
-	 $redis=Cache::store('redis')->handler();
+	//  $redis=Cache::store('redis')->handler();
 	
-         if($redis->exists("chat:{$arr[0]}:{$arr[1]}")){
-		$chats=$redis->lRange("chat:{$arr[0]}:{$arr[1]}",0,-1);
+         if(Redis::exists("chat:{$arr[0]}:{$arr[1]}")){
+		$chats=Redis::lrange("chat:{$arr[0]}:{$arr[1]}",0,-1);
 		//var_dump($chats);
 		foreach($chats as $chat){
 			$msg[]=json_decode($chat,true);
@@ -128,15 +128,15 @@ class PagesController extends Controller
   } 
 
   public function sign(Request $request){
-  	$sign=$request->param('sign');
-	 $user_id=session('id');
-	 $redis=Cache::store('redis')->handler();
-	$redis->hMset("user:{$user_id}",['sign'=>$sign]);		
+  	$sign=$request->sign;
+	 $user_id=session()->get('id');
+	
+	Redis::hmset("user:{$user_id}",['sign'=>$sign]);		
   }
 
   public function status(Request $request){
 	$uid=$request->param('uid');
-        $redis=Cache::store('redis')->handler();
+    $redis=Cache::store('redis')->handler();
 	$res=$redis->hMget("user:$uid",['status']);
 	return json($res);		
   }

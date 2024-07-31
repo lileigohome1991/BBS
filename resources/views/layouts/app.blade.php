@@ -61,9 +61,9 @@ layui.use('layim',function(layim){
 			"data":{}
 		},
 
-		// uploadImage:{
-		// 	url:"{{ env('APP_URL') }}/upload"
-		// },
+		uploadImage:{
+			url:"{{ env('APP_URL') }}/upload"
+		},
 		
 
 		//以下为我们内置的模版，也可以换成你的任意页面。若不开启，剔除该项即可
@@ -86,8 +86,6 @@ layui.use('layim',function(layim){
 		}
 	});
 	
-	
-
 	layim.on('sendMessage', function(res){
 		console.log('我在发消息。。',res);
 		 ws.send(JSON.stringify({
@@ -95,13 +93,15 @@ layui.use('layim',function(layim){
     			,data: res
  		 })); 
 	})
-	// layim.on('sign', function(value){
-	// 	 console.log(value); //获得新的签名
-  	// 	$.post('/sign',{sign:value},function(res){
+
+
+	layim.on('sign', function(value){
+		 console.log(value); //获得新的签名
+  		$.post('/sign',{sign:value},function(res){
 							
-	// 	})
- 	// 	 //此时，你就可以通过Ajax将新的签名同步到数据库中了。
-	// }); 
+		})
+ 		 //此时，你就可以通过Ajax将新的签名同步到数据库中了。
+	}); 
 
 	//每次窗口打开或切换，即更新对方的状态
 	// layim.on('chatChange', function(res){
