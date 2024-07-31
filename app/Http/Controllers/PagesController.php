@@ -111,8 +111,8 @@ class PagesController extends Controller
 	 sort($arr);
 
 	//  $redis=Cache::store('redis')->handler();
-	
-         if(Redis::exists("chat:{$arr[0]}:{$arr[1]}")){
+	 $data=['code'=>0,'msg'=>'','data'=>[]];
+     if(Redis::exists("chat:{$arr[0]}:{$arr[1]}")){
 		$chats=Redis::lrange("chat:{$arr[0]}:{$arr[1]}",0,-1);
 		//var_dump($chats);
 		foreach($chats as $chat){
