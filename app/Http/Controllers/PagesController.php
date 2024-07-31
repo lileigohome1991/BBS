@@ -124,7 +124,7 @@ class PagesController extends Controller
 
 	//$this->assign('chat',json_encode($data));
 	
-	return view('pages.chatlog', compact(['chat'=>$data]));
+	return view('pages.chatlog')->with('chat',json_encode($data));
   } 
 
   public function sign(Request $request){
