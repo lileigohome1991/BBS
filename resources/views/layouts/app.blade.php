@@ -133,6 +133,7 @@ layui.use('layim',function(layim){
 		
 	ws.onmessage=function(res){
 		res=JSON.parse(res.data)
+		console.log(res)
 		if(res.type == 'friend'){
 			layim.getMessage(res);	
 		}
