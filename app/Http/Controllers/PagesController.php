@@ -122,9 +122,9 @@ class PagesController extends Controller
 		
 	}
 
-	$this->assign('chat',json_encode($data));
+	//$this->assign('chat',json_encode($data));
 	
-	 return  $this->fetch();	
+	return view('topics.index', compact(['chat'=>json_encode($data)]));
   } 
 
   public function sign(Request $request){
@@ -136,17 +136,18 @@ class PagesController extends Controller
 
   public function status(Request $request){
 	$uid=$request->param('uid');
-    $redis=Cache::store('redis')->handler();
-	$res=$redis->hMget("user:$uid",['status']);
-	return json($res);		
+    // $redis=Cache::store('redis')->handler();
+	$res=Redis::hmget("user:$uid",['status']);
+	return json_encode($res);		
   }
   public function online(Request $request){
-  	$status= $request->param('status');
+  	$status= $request->status;
 	
-	$uid=session('id');
+	$uid=session()->get('id');
 	
-	$redis=Cache::store('redis')->handler();
-	$redis->hMset("user:$uid",['status'=>$status]);
+	// $redis=Cache::store('redis')->handler();
+	// $redis->hMset("user:$uid",['status'=>$status]);
+	Redis::hmset("user:$uid",['status'=>$status]);
 	
   }
 }
