@@ -44,6 +44,9 @@
 layui.use('layim',function(layim){
 	
 	ws=new WebSocket("wss://limuyi.shop:7777?uid={{Auth::id()}}");
+	ws.onopen=function(){
+		console.log('connect  success......');
+	}
 	
 
 	layim.config({
@@ -127,12 +130,12 @@ layui.use('layim',function(layim){
 	}); 
 
 		
-	// ws.onmessage=function(res){
-	// 	res=JSON.parse(res.data)
-	// 	if(res.type == 'friend'){
-	// 		layim.getMessage(res);	
-	// 	}
-	// }
+	ws.onmessage=function(res){
+		res=JSON.parse(res.data)
+		if(res.type == 'friend'){
+			layim.getMessage(res);	
+		}
+	}
 })
 
 
