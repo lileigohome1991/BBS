@@ -16,11 +16,11 @@ class GatewayWorkerCommand extends Command
     // 命令行的描述
     protected $description = "start gateway.....";
 
-    protected $port = 6666;
+    protected $port = 9501;
 
-    protected $registerPort = 7777;
+    protected $registerPort = 9502;
 
-    protected $WS_Intranet_ip = '8.130.77.188';
+    protected $WS_Intranet_ip = '127.0.0.1';
 
     public function __construct()
     {
