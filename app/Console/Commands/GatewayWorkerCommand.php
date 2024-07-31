@@ -69,6 +69,7 @@ class GatewayWorkerCommand extends Command
 
         );
         $gateway = new Gateway('websocket://0.0.0.0:' . $this->port,$content);
+        $gateway->transport='ssl';
         $gateway->name = 'Gateway';#设置Gateway进程的名称，方便status命令中查看统计
         $gateway->count = 2;#进程的数量
         $gateway->lanIp = $this->WS_Intranet_ip;#内网ip,多服务器分布式部署的时候需要填写真实的内网ip
