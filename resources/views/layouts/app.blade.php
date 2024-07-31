@@ -43,7 +43,7 @@
 
 layui.use('layim',function(layim){
 	
-	ws=new WebSocket("wss://8.130.77.188:7777?uid={{Auth::id()}}");
+	ws=new WebSocket("wss://limuyi.shop:7777?uid={{Auth::id()}}");
 	
 
 	layim.config({
