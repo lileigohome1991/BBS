@@ -43,7 +43,7 @@
 
 layui.use('layim',function(layim){
 	
-	ws=new WebSocket("wss://8.130.77.188:9501?uid={{Auth::id()}}");
+	ws=new WebSocket("wss://8.130.77.188:7777?uid={{Auth::id()}}");
 	
 
 	layim.config({
@@ -58,9 +58,9 @@ layui.use('layim',function(layim){
 			"data":{}
 		},
 
-		// uploadImage:{
-		// 	url:"{{ env('APP_URL') }}/upload"
-		// },
+		uploadImage:{
+			url:"{{ env('APP_URL') }}/upload"
+		},
 		
 
 		//以下为我们内置的模版，也可以换成你的任意页面。若不开启，剔除该项即可
