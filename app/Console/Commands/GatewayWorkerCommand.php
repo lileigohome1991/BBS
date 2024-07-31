@@ -60,16 +60,17 @@ class GatewayWorkerCommand extends Command
 
     public function startGateWay()
     {
-        $content=array(
-            "ssl"=>array(
-                'local_cert'=>'/etc/nginx/cert/limuyi.shop.pem',
-                'local_pk'=>'/etc/nginx/cert/limuyi.shop.key',
-                "verify_peer"=>false,
+        $context = array(
+            // 更多ssl选项请参考手册 http://php.net/manual/zh/context.ssl.php
+            'ssl' => array(
+                // 请使用绝对路径
+                'local_cert'        =>'/etc/nginx/cert/limuyi.shop.pem', // 也可以是crt文件
+                'local_pk'          => '/etc/nginx/cert/limuyi.shop.key',
+                'verify_peer'       => false,
                 'allow_self_signed' => true, //如果是自签名证书需要开启此选项
             )
-
         );
-        $gateway = new Gateway('websocket://0.0.0.0:' . $this->port,$content);
+        $gateway = new Gateway('websocket://0.0.0.0:' . $this->port,$context);
         $gateway->transport='ssl';
         $gateway->name = 'Gateway';#设置Gateway进程的名称，方便status命令中查看统计
         $gateway->count = 2;#进程的数量
