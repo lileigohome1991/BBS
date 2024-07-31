@@ -87,6 +87,7 @@ layui.use('layim',function(layim){
 	});
 	
 	layim.on('sendMessage', function(res){
+		console.log('send data--',res)
 		 ws.send(JSON.stringify({
    			 type: 'chatMessage' //随便定义，用于在服务端区分消息类型
     			,data: res
