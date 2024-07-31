@@ -68,7 +68,7 @@ layui.use('layim',function(layim){
 		
 
 		//以下为我们内置的模版，也可以换成你的任意页面。若不开启，剔除该项即可
-		//   chatLog:  "{{ env('APP_URL') }}/chatlog"
+		  chatLog:  "{{ env('APP_URL') }}/chatlog"
 
 	})
 
