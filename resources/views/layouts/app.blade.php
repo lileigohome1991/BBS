@@ -109,8 +109,8 @@ layui.use('layim',function(layim){
 
 		$.post('/status',{uid:res.data.id},function(result){
 			result=JSON.parse(result);
-			console.log('status res-->',result);
-			if(result.status == 'online'){
+			console.log('status res-->',result[0]);
+			if(result[0] == 'online'){
     				layim.setChatStatus('<span style="color:#00ff00;">在线</span>'); //模拟标注好友在线状态
 			}else{
 
