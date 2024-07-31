@@ -135,7 +135,7 @@ class PagesController extends Controller
   }
 
   public function status(Request $request){
-	$uid=$request->param('uid');
+	$uid=$request->uid;
     // $redis=Cache::store('redis')->handler();
 	$res=Redis::hmget("user:$uid",['status']);
 	return json_encode($res);		
