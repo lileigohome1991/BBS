@@ -21,7 +21,10 @@
         "overtrue/laravel-lang": "~4.0",
         "overtrue/pinyin": "~4.0",
         "predis/predis": "~1.1",
-        "summerblue/laravel-active": "8.*"
+        "summerblue/laravel-active": "8.*",
+        "workerman/gateway-worker": "^3.1",
+        "workerman/gatewayclient": "^3.0",
+        "workerman/workerman": "^4.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "~3.6",
