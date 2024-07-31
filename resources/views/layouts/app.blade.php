@@ -136,6 +136,12 @@ layui.use('layim',function(layim){
 			layim.getMessage(res);	
 		}
 	}
+	ws.onclose = function (e) {
+		console.log('websocket 断开: ' + e.code + ' ' + e.reason + ' ' + e.wasClean)
+		console.log(e)
+	}
+
+	
 })
 
 
