@@ -69,7 +69,7 @@ class PagesController extends Controller
 
 
 
-  public function upload(Request $request){
+  public function upload(Request $request,ImageUploadHandler $uploader){
 	// $file = request()->file('file');
     // 	// 移动到框架应用根目录/uploads/ 目录下
     // 	$info = $file->move( 'uploads');
