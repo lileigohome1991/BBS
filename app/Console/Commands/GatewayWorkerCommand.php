@@ -16,7 +16,7 @@ class GatewayWorkerCommand extends Command
     // 命令行的描述
     protected $description = "start gateway.....";
 
-    protected $port = 9501;
+    protected $port = 8282;
 
     protected $registerPort = 9502;
 
@@ -64,7 +64,8 @@ class GatewayWorkerCommand extends Command
             "ssl"=>array(
                 'local_cert'=>'/etc/nginx/cert/limuyi.shop.pem',
                 'local_pk'=>'/etc/nginx/cert/limuyi.shop.key',
-                "verify_peer"=>false
+                "verify_peer"=>false,
+                'allow_self_signed' => true, //如果是自签名证书需要开启此选项
             )
 
         );
