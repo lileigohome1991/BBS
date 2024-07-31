@@ -70,11 +70,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                //'chat_token'=> $chat_token,
+            ]);
+
             $username=$data['name'];
             $password = Hash::make($data['password']);
             //$redis=Cache::store('redis')->handler();
             //redis 存用户信息   hash  user:1  key => ['username'=>'','id'=>1,'sign'=>'']
-            $user_id=Redis::incr('user:id');
+            $user_id = $user->id;
             Redis::set($username,$user_id);
             $user_info = [
                 'username'=>$username,
@@ -90,14 +98,12 @@ class RegisterController extends Controller
             session()->put('id',$user_id);
             $key = config('app.key');
     
-            $chat_token=encrypt($user_id,$key);
+            //$chat_token=encrypt($user_id,$key);
            // return json(['status'=>'success','token'=>$token]);
 
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'chat_token'=> $chat_token,
-        ]);
+         
+        
+
+            return $user;
     }
 }
