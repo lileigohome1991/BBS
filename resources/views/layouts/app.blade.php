@@ -95,13 +95,13 @@ layui.use('layim',function(layim){
 	})
 
 
-	layim.on('sign', function(value){
-		 console.log(value); //获得新的签名
-  		$.post('/sign',{sign:value},function(res){
+	// layim.on('sign', function(value){
+	// 	 console.log(value); //获得新的签名
+  	// 	$.post('/sign',{sign:value},function(res){
 							
-		})
- 		 //此时，你就可以通过Ajax将新的签名同步到数据库中了。
-	}); 
+	// 	})
+ 	// 	 //此时，你就可以通过Ajax将新的签名同步到数据库中了。
+	// }); 
 
 	//每次窗口打开或切换，即更新对方的状态
 	// layim.on('chatChange', function(res){
