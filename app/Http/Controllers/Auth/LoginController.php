@@ -51,6 +51,7 @@ class LoginController extends Controller
          $username=Auth::user()->name;
          if(Redis::exists($username)){
             $user_id=Redis::get($username);
+            Redis::hset("user:$user_id",'status','online');
             // $pwd=Redis::hMget('user:'.$user_id,['password']);
             session()->put('id', $user_id);
             // $key = config('app.key');
