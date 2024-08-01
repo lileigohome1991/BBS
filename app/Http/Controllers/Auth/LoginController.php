@@ -64,20 +64,33 @@ class LoginController extends Controller
 
 
 
-    // protected function sendLoginResponse(Request $request)
-    // {
-    //     $request->session()->regenerate();
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
 
-    //     $this->clearLoginAttempts($request);
+        $request->session()->invalidate();
 
-    //     if ($response = $this->authenticated($request, $this->guard()->user())) {
-    //         return $response;
-    //     }
-    //     return $request->wantsJson()
-    //                 ? new JsonResponse([], 204)
-    //                 : redirect()->intended($this->redirectPath());
-    // }
+        $request->session()->regenerateToken();
 
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        //退出时候修改用户状态
+        $status= 'hide';
+	
+        $uid=session()->get('id');
+        
+        // $redis=Cache::store('redis')->handler();
+        // $redis->hMset("user:$uid",['status'=>$status]);
+        Redis::hmset("user:$uid",['status'=>$status]);
+
+
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('/');
+    }
    
 
 
