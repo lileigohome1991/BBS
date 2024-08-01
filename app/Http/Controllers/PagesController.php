@@ -45,9 +45,6 @@ class PagesController extends Controller
 				$count++;
 			}	
            
-			
-          
-           
 			$list['username']= 	Redis::hgetall($key)['username'];
 			$list['id']= 	Redis::hgetall($key)['id'];
 			$list['avatar']= 	Redis::hgetall($key)['avatar'];

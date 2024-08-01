@@ -139,13 +139,13 @@ layui.use('layim',function(layim){
 		}
 	}
 	ws.onclose = function (e) {
-		if(e.code=='1006'){
-			ws=new WebSocket("wss://limuyi.shop:9501?uid={{Auth::id()}}");
-		}else{
-			console.log('websocket 断开: ' + e.code + ' ' + e.reason + ' ' + e.wasClean)
-			console.log(e)
+		// if(e.code=='1006'){
+		// 	ws=new WebSocket("wss://limuyi.shop:9501?uid={{Auth::id()}}");
+		// }else{
+		// 	console.log('websocket 断开: ' + e.code + ' ' + e.reason + ' ' + e.wasClean)
+		// 	console.log(e)
 
-		}
+		// }
 		
 	}
 

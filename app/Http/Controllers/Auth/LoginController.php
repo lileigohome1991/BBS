@@ -84,7 +84,7 @@ class LoginController extends Controller
         // $redis=Cache::store('redis')->handler();
         // $redis->hMset("user:$uid",['status'=>$status]);
         Redis::hmset("user:$uid",['status'=>$status]);
-
+        session()->forget('id');
 
 
         return $request->wantsJson()
