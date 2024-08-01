@@ -66,6 +66,19 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+
+
+         //开始：退出时候修改用户状态
+         $status= 'hide';
+	
+         $uid=session()->get('id');
+         
+         // $redis=Cache::store('redis')->handler();
+         // $redis->hMset("user:$uid",['status'=>$status]);
+         Redis::hset("user:$uid",'status',$status);
+
+
+         //结束
         $this->guard()->logout();
 
         $request->session()->invalidate();
@@ -76,15 +89,7 @@ class LoginController extends Controller
             return $response;
         }
 
-        //退出时候修改用户状态
-        $status= 'hide';
-	
-        $uid=session()->get('id');
-        
-        // $redis=Cache::store('redis')->handler();
-        // $redis->hMset("user:$uid",['status'=>$status]);
-        Redis::hset("user:$uid",'status',$status);
-        session()->forget('id');
+       
 
 
         return $request->wantsJson()
